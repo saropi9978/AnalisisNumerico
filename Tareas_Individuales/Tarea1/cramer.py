@@ -5,8 +5,12 @@ Realizado por:
 
 import numpy as np
 import random
+import time
 #Prueba
 n=int (input("digite el tamaño de la matriz: "))
+start_time = time.time()
+print("tiempo inicial",time.ctime( start_time) )
+
 def generarArreglos(n): 
     matriz= ([[0 for j in range(n)] for i in range(n)])
     res= ([0 for i in range(n)])
@@ -56,10 +60,12 @@ n=3
 #generarMatrices()
 
 
-print(matriz)
-print("Solucion Directa Exacta")
-X = np.linalg.solve(matriz,res)
-print(X)
+print("resolver A*x = B")
+print(np.array(matriz), "X = ", res)
+
+# print("Solucion Directa Exacta")
+# X = np.linalg.solve(matriz,res)
+# print(X)
 
 
 print("Solucion por Cramer")
@@ -67,7 +73,7 @@ print("Solucion por Cramer")
 resultado = sol_cramer(matriz,res)
 print(resultado)
 
-
+print("tiempo transcurrido: ", (time.time() - start_time))
 """
 referencias:
     -https://youtu.be/DQN4tjbGDfw
