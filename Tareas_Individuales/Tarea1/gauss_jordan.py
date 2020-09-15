@@ -1,12 +1,15 @@
 import numpy
 import random
-
+import time
 """
 Modificado y mejorado por:
     -Santiago Romero pineda
 """
 
 n=int (input("digite el tamaño de la matriz: "))
+start_time = time.time()
+print("tiempo inicial",time.ctime( start_time) )
+
 def generarArreglos(n): 
     matriz= ([[0 for j in range(n)] for i in range(n)])
     res= ([0 for i in range(n)])
@@ -61,15 +64,15 @@ def det(n):
 
 
 #ejercicio1
-matriz=([[1,1],[0.0001,1]])
-res= ([2,1])
-n=2
+# matriz=([[1,1],[0.0001,1]])
+# res= ([2,1])
+# n=2
 
 
 #ejercicio3
-#matriz=([[4,-1,-1],[-1,4,-1],[-1,-1,4]])
-#res= ([1,2,3])
-#n=3
+matriz=([[4,-1,-1],[-1,4,-1],[-1,-1,4]])
+res= ([1,2,3])
+n=3
 
 
 #ejercicio4
@@ -86,7 +89,7 @@ sol(n)
 det(n)
 
 
-
+print("tiempo transcurrido: ", (time.time() - start_time))
 
 
 
