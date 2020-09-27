@@ -1,3 +1,9 @@
+"""
+Realizado por:
+ - Santiago Romero
+ - Sandra Chavez
+ - Ricardo Bernal
+"""
 import scipy
 import scipy.optimize as opt
 import numpy
