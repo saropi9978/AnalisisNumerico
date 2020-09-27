@@ -1,3 +1,9 @@
+"""
+Realizado por:
+ - Santiago Romero
+ - Sandra Chavez
+ - Ricardo Bernal
+"""
 import numpy as np
 import math as m
 import matplotlib.pyplot as plt
