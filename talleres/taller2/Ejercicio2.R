@@ -97,3 +97,7 @@ cat("Mediante m?todo de Jacobi\n")
 
 itersolve(A, b, nmax = 5, tol = 1e-9, method = "Jacobi")
 
+
+
+#Referencias
+#rstudio-pubs-static.s3.amazonaws.com
