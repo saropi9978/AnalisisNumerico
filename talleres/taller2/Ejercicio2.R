@@ -1,4 +1,4 @@
-#Ejercicio 1
+#Ejercicio 2
 
 #Punto A
 require(Matrix)
