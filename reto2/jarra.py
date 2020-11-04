@@ -25,22 +25,31 @@ for i in range(0, 5):
 	p = Circle((0, 0), b, color="green", fill=True)
 
 	ax.add_patch(p)
-	art3d.pathpatch_2d_to_3d(p, z = h)
+	art3d.pathpatch_2d_to_3d(p, z = h+1.9)
 	h = h + 0.1
 
 
 h = 0 #Altura (z)
 b = 0.0 #Radio 2
-
+#esfera
 for i in np.arange(-1.9,1.9,0.1):
     p = Circle((0, 0), b, color="green", fill=True)
     ax.add_patch(p)
-    art3d.pathpatch_2d_to_3d(p, z = i)
+    art3d.pathpatch_2d_to_3d(p, z = i+1.9)
     b=4-(i*i)
     print(b)
+
+#paraboloide
+perimetro=0.0
+for i in np.arange(0,4,0.05):
+    perimetro+=0.01
+    p = Circle((0, 0), perimetro, color="green", fill=True)
+    ax.add_patch(p)
+    art3d.pathpatch_2d_to_3d(p, z = i)
+
     
 
 ax.set_xlim(-5, 5)
 ax.set_ylim(-5, 5)
-ax.set_zlim(-2, 2)
+ax.set_zlim(0, 8)
 plt.show()
