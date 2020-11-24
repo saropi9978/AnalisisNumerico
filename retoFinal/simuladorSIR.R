@@ -1,3 +1,5 @@
+
+
 #
 # This is a Shiny web application. You can run the application by clicking
 # the 'Run App' button above.
@@ -22,7 +24,7 @@ ui <- fluidPage(
                   choices = list("adams",
                                  "rk4","euler"),
                   selected = "adams"),
-      sliderInput("l",
+      sliderInput("L",
                   "Valor del area:",
                   min = 6,
                   max = 20,
@@ -86,7 +88,8 @@ ui <- fluidPage(
     
     # Show a plot of the generated distribution
     mainPanel(
-      plotOutput("distPlot")
+      plotOutput("distPlot"),
+      tableOutput("table1")
     )
   )
 )
@@ -97,9 +100,8 @@ server <- function(input, output) {
   output$distPlot <- renderPlot({
     #Se limpian los elementos creados con anterioridad
     #rm(list=ls())
-    #Se limpia la consola para una mejor visualizacion 
+    #Se limpia la consola para una mejor visualizacion
     library(deSolve)
-    library(EpiDynamics)
     
     #Modelo basado en el escrito "An Epidemic model of Malware"
     
@@ -111,7 +113,7 @@ server <- function(input, output) {
         dI <- (alpha*E) - (miu+gammaa)*I
         dR <- (gammaa*I) - (miu+delta)*R
         dV <- (siggma*S) - (miu+epsilon)*V
-
+        
         return(list(c(dS, dI, dR, dV, dE)))
       })
     }
@@ -124,7 +126,7 @@ server <- function(input, output) {
       epsilon=0.001,
       siggma = input$sigma,
       delta= 0.001,
-      phi=(input$beta*input$r*input$r*3.14)/(input$l*input$l))
+      phi=(input$beta*input$r*input$r*3.14)/(input$L*input$L))
     
     v_iniciales <- c(S=input$S, I=input$I, R=input$R, V=input$V, E=input$E)
     
@@ -144,13 +146,22 @@ server <- function(input, output) {
     lines(dt, V, type = "l", col = "brown")
     lines(dt, E, type = "l", col = "orange")
     title("Modelo SIR")
-    legend((input$Tiempo)/2, N + 0.25, 
+    legend((input$Tiempo)/2, N + 0.25,
            legend=c("Suceptibles", "Infectados", "Recuperados", "Vacunados","Expuestos"),
            col=c("blue", "red", "green","brown", "orange"), lty=rep(1, 2))
     
-  })
+    
+    # #Calcular R0
+    
+    r0 <- (((input$beta)*(3.1416)*((input$r)*(input$r))*(sum(v_iniciales))*(0.001 + 0.001)*(input$alpha))/((input$L * input$L)*(0.001 + input$alpha)*(0.001 + input$gamma)*(0.001 + 0.001 + input$sigma)))
+    
+    output$table1 <- renderTable(data.frame(a = 1L, date = "7 Jan 17", b = 80L, c = 80L, d = -4L,
+                                            e = 26L, f = 58L, g = 16L, h = 12L, i = 12L, R0= r0))
   
+  })
 }
 
-# Run the application 
+# Run the application
 shinyApp(ui = ui, server = server)
+
+
