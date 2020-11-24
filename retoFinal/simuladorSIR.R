@@ -22,11 +22,16 @@ ui <- fluidPage(
                   choices = list("adams",
                                  "rk4","euler"),
                   selected = "adams"),
+      sliderInput("l",
+                  "Valor del area:",
+                  min = 6,
+                  max = 20,
+                  value = 10),
       sliderInput("r",
                   "Valor del radio:",
                   min = 0.5,
                   max = 2,
-                  value = 1),
+                  value = 2),
       sliderInput("beta",
                   "Valor beta (tasa de infeccion):",
                   min = 0.0001,
@@ -119,7 +124,7 @@ server <- function(input, output) {
       epsilon=0.001,
       siggma = input$sigma,
       delta= 0.001,
-      phi=(input$beta*input$r*input$r*3.14)/(100))
+      phi=(input$beta*input$r*input$r*3.14)/(input$l*input$l))
     
     v_iniciales <- c(S=input$S, I=input$I, R=input$R, V=input$V, E=input$E)
     
